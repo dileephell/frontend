@@ -1,13 +1,12 @@
-import { useState } from "react";
-import Index from "./components/Index";
+import React from 'react';
+import Index from './components/Index';
+import { AuthProvider } from './hooks/useAuth';
 
 function App() {
-  const [isLoggedIn, setLoggedIn] = useState(false);
-
   return (
-    <>
-      <Index isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
-    </>
+    <AuthProvider>
+      <Index />
+    </AuthProvider>
   );
 }
 

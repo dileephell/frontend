@@ -5,9 +5,10 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
 
-export default function SearchAppBar({ isLoggedIn, setLoggedIn }) {
+export default function Header({ isLoggedIn, setLoggedIn }) {
   const handleLogout = () => {
     setLoggedIn(false);
+    localStorage.removeItem('token');
   };
 
   return (

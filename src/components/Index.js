@@ -3,37 +3,26 @@ import SignUp from "./Auth/SignUp";
 import Header from "./Navbar/Header";
 import Home from "./Home";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useAuth } from '../hooks/useAuth';
 
-export default function Index(props) {
-  const { isLoggedIn, setLoggedIn } = props;
+export default function Index() {
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
+
   return (
-    <div>
-      <BrowserRouter>
-        <Header isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
-        {isLoggedIn ? (
-          <Routes>
-            <Route
-              path="/home"
-              element={<Home setLoggedIn={setLoggedIn} />}
-            ></Route>
-            <Route path="*" element={<Navigate to="/home" replace />} />
-          </Routes>
-        ) : (
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <SignIn setIsLoggedIn={setLoggedIn} isLoggedIn={isLoggedIn} />
-              }
-            ></Route>
-            <Route
-              path="/signup"
-              element={<SignUp setIsLoggedIn={setLoggedIn} />}
-            ></Route>
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        )}
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Header isLoggedIn={isLoggedIn} setLoggedIn={setIsLoggedIn} />
+      {isLoggedIn ? (
+        <Routes>
+          <Route path="/home" element={<Home setLoggedIn={setIsLoggedIn} />} />
+          <Route path="*" element={<Navigate to="/home" replace />} />
+        </Routes>
+      ) : (
+        <Routes>
+          <Route path="/" element={<SignIn setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="/signup" element={<SignUp setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      )}
+    </BrowserRouter>
   );
 }
